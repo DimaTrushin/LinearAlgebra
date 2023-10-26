@@ -1,0 +1,292 @@
+\ProvidesFile{lecture07.tex}[Лекция 7]
+
+
+\subsection{Полилинейность и кососимметричность определителя}
+
+Сейчас мы докажем, что определитель обладает всеми свойствами (II) и (II').
+В силу утверждения~\ref{claim::DetTranspose} нам достаточно показать только (II).
+
+\begin{claim}
+\label{claim::DetPolyAnti}
+Отображение $\det\colon \Matrix{n}\to \mathbb R$ рассматриваемое как отображение столбцов матрицы является полилинейным и кососимметричным, т.е. удовлетворяет следующим свойствам:
+\begin{enumerate}
+\item $\det(A_1,\ldots, A_i + A_i', \ldots, A_n) = \det(A_1,\ldots, A_i, \ldots, A_n) + \det(A_1,\ldots,A_i', \ldots, A_n)$ для любого $i$.
+
+\item $\det(A_1,\ldots, \lambda A_i, \ldots, A_n) = \lambda \det(A_1,\ldots, A_i, \ldots, A_n)$ для любого $i$ и любого $\lambda\in\mathbb R$.
+
+\item $\det(A_1,\ldots, A_i, \ldots, A_j, \ldots, A_n) = -\det(A_1,\ldots, A_j, \ldots, A_i, \ldots, A_n)$ для любых различных $i$ и $j$.
+
+\item $\det E = 1$.
+\end{enumerate}
+\end{claim}
+\begin{proof}
+Мы знаем, что 
+\[
+\det A = \det A^t = \sum_{\sigma\in\Sym{n}}\sgn(\sigma)a_{\sigma(1)1} \ldots a_{\sigma(i)i}\ldots a_{\sigma(n)n}
+\]
+Проверим свойство (1):
+\begin{gather*}
+\det(A_1,\ldots, A_i + A_i', \ldots, A_n) = \sum_{\sigma\in\Sym{n}}\sgn(\sigma)a_{\sigma(1)1} \ldots \left(a_{\sigma(i)i} + a_{\sigma(i)i}'\right)\ldots a_{\sigma(n)n}=\\
+= \sum_{\sigma\in\Sym{n}}\sgn(\sigma)a_{\sigma(1)1} \ldots a_{\sigma(i)i}\ldots a_{\sigma(n)n} +\sum_{\sigma\in\Sym{n}}\sgn(\sigma)a_{\sigma(1)1} \ldots a_{\sigma(i)i}'\ldots a_{\sigma(n)n} =\\
+= \det(A_1,\ldots, A_i, \ldots, A_n) + \det(A_1,\ldots,A_i', \ldots, A_n)
+\end{gather*}
+Теперь свойство (2):
+\[
+\det(A_1,\ldots, \lambda A_i, \ldots, A_n) = \sum_{\sigma\in\Sym{n}}\sgn(\sigma)a_{\sigma(1)1} \ldots \left(\lambda a_{\sigma(i)i}\right)\ldots a_{\sigma(n)n}= \lambda \det(A_1,\ldots,  A_i, \ldots, A_n) 
+\]
+Для проверки свойства (3) введем следующее обозначение.
+Пусть $\tau\in\Sym{n}$ обозначает транспозицию $(i,j)$.
+Тогда посчитаем определитель с переставленными местами столбцами $i$ и $j$:
+\begin{gather*}
+\det (A_1,\ldots, A_j, \ldots, A_i, \ldots, A_n) = \sum_{\sigma\in\Sym{n}}\sgn(\sigma) a_{\sigma(1)1}\ldots a_{\sigma(i)j}\ldots a_{\sigma(j)i}\ldots a_{\sigma(n)n} = \\
+=  \sum_{\sigma\in\Sym{n}}\sgn(\sigma) a_{\sigma(1)\tau(1)}\ldots a_{\sigma(i)\tau(i)}\ldots a_{\sigma(j)\tau(j)}\ldots a_{\sigma(n)\tau(n)} = \\
+= \sum_{\sigma\in\Sym{n}} \sgn(\sigma) a_{\sigma(\tau^{-1}(1))1} \ldots a_{\sigma(\tau^{-1}(n))n} = -\sum_{\sigma\in\Sym{n}} \sgn(\sigma\tau^{-1}) a_{\sigma(\tau^{-1}(1))1} \ldots a_{\sigma(\tau^{-1}(n))n}
+\end{gather*}
+Здесь при переходе от второй строчки к третьей мы воспользовались замечанием перед утверждением~\ref{claim::DetTranspose}.
+Так как отображение $\Sym{n}\to \Sym{n}$ по правилу $\sigma\mapsto \sigma \tau^{-1}$ является биекцией, то если $\sigma$ пробегает все перестановки, то и $\sigma\tau^{-1}$ пробегает все перестановки.
+А значит, делая замену $\rho = \sigma \tau^{-1}$, получаем
+\[
+-\sum_{\sigma\in\Sym{n}} \sgn(\sigma\tau^{-1}) a_{\sigma(\tau^{-1}(1))1} \ldots a_{\sigma(\tau^{-1}(n))n} = -\det (A_1,\ldots, A_i, \ldots, A_j,\ldots A_n)
+\]
+
+(4) Это непосредственно следует из определения, либо, если хотите, можно сослаться на утверждение~\ref{claim::DetUpperTr}.
+\end{proof}
+
+\begin{claim}
+\label{claim::PolyLinearZero}
+Пусть $\Phi\colon \Matrix{n}\to \mathbb R$ -- полилинейное кососимметричное отображение по столбцам.
+И пусть матрица $A$ имеет нулевой столбец, тогда $\Phi(A) = 0$.%
+\footnote{Аналогичное утверждение выполнено для полилинейного и кососимметричного отображения по строкам, тогда в матрице $A$ должна быть нулевая строка.}
+\end{claim}
+\begin{proof}
+Пусть $A = (A_1|\ldots|0|\ldots|A_n)$.
+Тогда
+\[
+\Phi(A) = \Phi(A_1,\ldots, 0, \ldots, A_n) = \Phi(A_1,\ldots, 0 + 0, \ldots, A_n) = \Phi(A_1,\ldots, 0, \ldots, A_n) +\Phi(A_1,\ldots, 0, \ldots, A_n) 
+\]
+Теперь вычтем из обеих частей $\Phi(A_1,\ldots, 0, \ldots, A_n)$ и получим, что $\Phi(A_1,\ldots, 0, \ldots, A_n) =  0$.
+\end{proof}
+
+\begin{claim}
+\label{claim::DetZero}
+Если $A\in\Matrix{n}$ имеет нулевой столбец или нулевую строку, то $\det A = 0$.
+\end{claim}
+\begin{proof}
+Так как определитель является полилинейной и кососимметричной функцией как по строкам так и по столбцам, то это утверждение следует из предыдущего.
+\end{proof}
+
+
+\paragraph{Определитель от элементарных матриц}
+
+\begin{claim}
+Верны следующие утверждения:
+\begin{enumerate}
+\item $\det (S_{ij}(\lambda)) = 1$, где $S_{ij}(\lambda)\in\Matrix{n}$ -- матрица элементарного преобразования первого типа.
+
+\item $\det (U_{ij}) = -1$, где $U_{ij}\in\Matrix{n}$ -- матрица элементарного преобразования второго типа.
+
+\item $\det(D_i(\lambda)) = \lambda$, где $D_{i}(\lambda)\in\Matrix{n}$ -- матрица элементарного преобразования третьего типа.
+\end{enumerate}
+\end{claim}
+\begin{proof}
+(1) Является следствием для случая верхне- и нижнетреугольных матриц.
+
+(2) Так как $U_{ij}$ получается из единичной матрицы перестановкой $i$-го и $j$-го столбцов, то результат следует из кососимметричности определителя.
+
+(3) Следует из полилинейности определителя -- свойство (II)~(2).
+\end{proof}
+
+
+\subsection{Полилинейные кососимметрические отображения}
+
+Все утверждения в этом разделе доказываются для строк.
+Соответствующие утверждения для столбцов доказываются аналогично.
+Их формулировки и доказательства я оставляю в качестве упражнения.
+
+\begin{claim}
+\label{claim::PolyAntiAndElementary}
+Пусть $\phi\colon \Matrix{n}\to \mathbb R$ -- полилинейное кососимметрическое отображение по строкам матриц, т.е. удовлетворяет следующим свойствам:%
+\footnote{Здесь через $A_i$ обозначаются строки матрицы $A$ идущие сверху вниз.}
+\begin{enumerate}
+\item $\phi(A_1,\ldots, A_i + A_i', \ldots, A_n) = \phi(A_1,\ldots, A_i, \ldots, A_n) + \phi(A_1,\ldots,A_i', \ldots, A_n)$ для любого $i$.
+
+\item $\phi(A_1,\ldots, \lambda A_i, \ldots, A_n) = \lambda \phi(A_1,\ldots, A_i, \ldots, A_n)$ для любого $i$ и любого $\lambda\in\mathbb R$.
+
+\item $\phi(A_1,\ldots, A_i, \ldots, A_j, \ldots, A_n) = -\phi(A_1,\ldots, A_j, \ldots, A_i, \ldots, A_n)$ для любых различных $i$ и $j$.
+\end{enumerate}
+Тогда $\phi(UA) = \det(U)\phi(A)$ для любой матрицы $A\in\Matrix{n}$ и любой элементарной матрицы $U\in\Matrix{n}$.
+\end{claim}
+\begin{proof}
+Случай $U = S_{ij}(\lambda)$.
+\begin{gather*}
+\phi(S_{ij}(\lambda)A) = \phi(A_1,\ldots, A_i + \lambda A_j, \ldots, A_j, \ldots, A_n) = \\
+= \phi(A_1,\ldots, A_i, \ldots, A_j, \ldots, A_n) + \lambda\phi(A_1,\ldots, A_j, \ldots, A_j, \ldots, A_n) =  \phi(A) = \det(S_{ij}(\lambda))\phi(A)
+\end{gather*}
+
+Случай $U= U_{ij}$.
+\begin{gather*}
+\phi(U_{ij}A) = \phi(A_1,\ldots, A_j, \ldots, A_i, \ldots, A_n) = -\phi(A_1,\ldots, A_i, \ldots, A_j, \ldots, A_n) = -\phi(A) = \det(U_{ij})\phi(A)
+\end{gather*}
+
+Случай $U=D_i(\lambda)$.
+\begin{gather*}
+\phi(D_i(\lambda)A) = \phi(A_1,\ldots,\lambda A_i,\ldots, A_n) = \lambda \phi(A_1,\ldots, A_i,\ldots, A_n) = \lambda \phi(A) = \det(D_i(\lambda))\phi(A)
+\end{gather*}
+\end{proof}
+
+\paragraph{Определитель и элементарные матрицы}
+
+Заметим, что по утверждению~\ref{claim::DetPolyAnti}, определитель тоже является полилинейной и кососимметрической функцией.
+Потому доказанное утверждение в частности означает, что $\det(UA) = \det(U)\det(A)$ для любой матрицы $A\in\Matrix{n}$ и любой элементарной матрицы $U\in\Matrix{n}$.
+
+\paragraph{Подсчет определителя}
+
+Предыдущее замечание позволяет дать эффективный способ вычисления определителя методом Гаусса.
+Мы берем матрицу $A$ и приводим ее к ступенчатому виду, попутно запоминая как изменился определитель по сравнению с определителем изначальной матрицы.
+Если же мы будем использовать только элементарные преобразования первого типа, то определитель вовсе меняться не будет.
+Ступенчатый вид матрицы всегда верхнетреугольный.
+Там определитель считается как произведение диагональных элементов.
+
+
+\paragraph{Следствия утверждения~\ref{claim::PolyAntiAndElementary}}
+
+\begin{claim}
+[Единственность для полилинейных кососимметричных]
+\label{claim::PolyAntiUnique}
+Пусть $\phi\colon \Matrix{n}\to \mathbb R$ -- полилинейное кососимметрическое отображение по строкам матриц.
+Тогда $\phi(X) = \det(X)\phi(E)$.
+В частности, если $\phi(E) = 1$, то $\phi = \det$.
+\end{claim}
+\begin{proof}
+Пусть $X\in\Matrix{n}$ -- произвольная матрица, тогда ее можно элементарными преобразованиями строк привести к улучшенному ступенчатому виду.
+Последнее означает, что $X = U_1 \ldots U_k S$, где $S$ -- матрица улучшенного ступенчатого вида, а $U_i$ -- матрицы элементарных преобразований.
+Применим к этому равенству отдельно $\phi$ и отдельно $\det$, получим
+\begin{align*}
+\phi(X) &= \det(U_1)\ldots \det(U_k)\phi(S)\\
+\det(X) &= \det(U_1)\ldots \det(U_k)\det(S)
+\end{align*}
+Теперь для матрицы $S$ у нас есть два варианта: либо $S$ единичная, либо содержит нулевую строку.
+
+Пусть $S = E$, тогда
+\begin{align*}
+\phi(X) &= \det(U_1)\ldots \det(U_k)\phi(E)\\
+\det(X) &= \det(U_1)\ldots \det(U_k)
+\end{align*}
+Откуда и получаем требуемое $\phi(X) = \det(X)\phi(E)$.
+
+Пусть теперь $S$ имеет нулевую строку.
+Тогда утверждения~\ref{claim::PolyLinearZero} и~\ref{claim::DetZero} гарантируют, что $\Phi(S) = 0$ и $\det(S) = 0$.
+Что тоже влечет равенство $\phi(X) = \det(X)\phi(E)$.
+\end{proof}
+
+\begin{claim}
+[Мультипликативность определителя]
+\label{claim::DetMulti}
+Пусть $A,B\in\Matrix{n}$ -- произвольные матрицы.
+Тогда $\det(AB) = \det(A)\det(B)$.
+\end{claim}
+\begin{proof}
+Фиксируем матрицу $B\in\Matrix{n}$ и рассмотрим отображение $\gamma\colon \Matrix{n}\to \mathbb R$ по правилу $A\mapsto \det(AB)$.
+Если $A_1,\ldots, A_n$ -- строки матрицы $A$, то $A_1B, \ldots, A_nB$ -- строки матрицы $AB$.
+Из этого легко видеть, что $\gamma$ -- полилинейна и кососимметрическая функция по строкам матрицы $A$.
+Значит по утверждению~\ref{claim::PolyAntiUnique} $\gamma(A) = \det(A)\gamma(E)$.
+Но последнее равносильно $\det(AB) = \det(A)\det (B)$.
+\end{proof}
+
+\begin{claim}
+[Определитель с углом нулей]
+Пусть $A,\in\Matrix{n}$ и $B\in\Matrix{m}$.
+Тогда
+\[
+\det
+\begin{pmatrix}
+{A}&{*}\\
+{0}&{B}
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+{A}&{0}\\
+{*}&{B}
+\end{pmatrix}
+=
+\det(A) \det(B)
+\]
+\end{claim}
+\begin{proof}
+Рассмотрим функцию $\phi\colon \Matrix{n}\to \mathbb R$ по правилу
+\[
+\phi(X) = 
+\det
+\begin{pmatrix}
+{X}&{*}\\
+{0}&{B}
+\end{pmatrix}
+\]
+Заметим, что эта функция является полилинейной и кососимметричной по столбцам матрицы $X$.
+В этом случае по утверждению~\ref{claim::PolyAntiUnique} о единственности для полилинейных кососимметрических отображений она имеет вид $\phi(X) = \det(X)\phi(E)$, то есть
+\[
+\det
+\begin{pmatrix}
+{A}&{*}\\
+{0}&{B}
+\end{pmatrix}
+=
+\det A
+\det
+\begin{pmatrix}
+{E}&{*}\\
+{0}&{B}
+\end{pmatrix}
+\]
+Теперь рассмотрим функцию $\psi\colon \Matrix{m}\to \mathbb R$ по правилу
+\[
+\psi(X) =
+\det
+\begin{pmatrix}
+{E}&{*}\\
+{0}&{X}
+\end{pmatrix}
+\]
+Заметим, что эта функция является полилинейной и кососимметричной по строкам матрицы $X$.
+В этом случае по утверждению~\ref{claim::PolyAntiUnique} о единственности для полилинейных кососимметрических отображений она имеет вид $\psi(X) = \det(X)\psi(E)$, то есть
+\[
+\det
+\begin{pmatrix}
+{E}&{*}\\
+{0}&{B}
+\end{pmatrix}
+=
+\det B
+\det
+\begin{pmatrix}
+{E}&{*}\\
+{0}&{E}
+\end{pmatrix}
+\]
+Последний определитель равен $1$, так как по утверждению~\ref{claim::DetUpperTr} определитель верхнетреугольной матрицы равен произведению ее диагональных элементов.
+Теперь собираем вместе доказанные факты и получаем требуемый результат.
+\end{proof}
+
+Заметим, что таким образом мы можем считать определитель для блочно верхнетреугольных матриц и для блочно нижнетреугольных матриц с любым количеством блоков.
+Формулы тогда будут выглядеть так
+\[
+\det
+\begin{pmatrix}
+{A_1}&{*}&{\ldots}&{*}\\
+{}&{A_2}&{\ldots}&{*}\\
+{}&{}&{\ddots}&{\vdots}\\
+{}&{}&{}&{A_k}\\
+\end{pmatrix}
+=
+\det
+\begin{pmatrix}
+{A_1}&{}&{}&{}\\
+{*}&{A_2}&{}&{}\\
+{\vdots}&{\vdots}&{\ddots}&{}\\
+{*}&{*}&{\ldots}&{A_k}\\
+\end{pmatrix}
+=\det A_1 \ldots \det A_k
+\]
+где $A_i\in\Matrix{n_i}$ -- обязательно квадратные матрицы.
+Это правило является обобщением утверждения о вычислении определителя для треугольных матриц.
