@@ -181,10 +181,131 @@ r_1(\cos \varphi + i \sin \varphi) r_2 (\cos \psi + i \sin \psi) = r_1 r_2 (\cos
 Тогда оказывается, что значения $p(z)$ пробегут по <<маленькой почти окружности>> вокруг $p(z_0)$ и может быть сделают более одного оборота.
 А это значит, что обойдя вокруг $p(z_0)$, мы обязательно попадем внутрь диска радиуса $r$.
 \begin{center}
-\includegraphics[scale = 0.5]{Figures/graph_cyrcle_cut.png}
+\tikzmath{
+\Ox = 4;
+\Oy = -1;
+\Angle = 35;
+function prdx(\ax, \ay, \bx, \by) {
+  return \ax * \bx - \ay * \by;
+};
+function prdy(\ax, \ay, \bx, \by) {
+  return \ax * \by + \bx * \ay;
+};
+function powx(\x, \y, \n) {
+  \zx = 1;
+  \zy = 0;
+  if \n > 0 then {
+    real \tmpx;
+    real \tmpy;
+    for \t in {1, ..., \n}{
+      \tmpx = \zx;
+      \tmpy = \zy;  
+      \zx = prdx(\tmpx, \tmpy, \x, \y);
+      \zy = prdy(\tmpx, \tmpy, \x, \y);
+    };
+  };
+  return \zx;
+};
+function powy(\x, \y, \n) {
+  \zx = 1;
+  \zy = 0;
+  if \n > 0 then {
+    real \tmpx;
+    real \tmpy;
+    for \t in {1, ..., \n}{
+      \tmpx = \zx;
+      \tmpy = \zy;  
+      \zx = prdx(\tmpx, \tmpy, \x, \y);
+      \zy = prdy(\tmpx, \tmpy, \x, \y);
+    };
+  };
+  return \zy;
+};
+\cfax = 1;
+\cfay = 0;
+\cfbx = 0.5;
+\cfby = 0.3;
+\cfcx = 0.2;
+\cfcy = -0.3;
+\scl = 0.6;
+\vecx = 1;
+\vecy = 1;
+function polyx(\x, \y) {
+  \zax = powx(\x, \y, 3);
+  \zay = powy(\x, \y, 3);
+  \zbx = powx(\x, \y, 4);
+  \zby = powy(\x, \y, 4);
+  \zcx = powx(\x, \y, 5);
+  \zcy = powy(\x, \y, 5);
+  return \Ox + \vecx + \scl * (prdx(\cfax, \cfay, \zax, \zay) + prdx(\cfbx, \cfby, \zbx, \zby) + prdx(\cfcx, \cfcy, \zcx, \zcy));  
+};
+function polyy(\x, \y) {
+  \zax = powx(\x, \y, 3);
+  \zay = powy(\x, \y, 3);
+  \zbx = powx(\x, \y, 4);
+  \zby = powy(\x, \y, 4);
+  \zcx = powx(\x, \y, 5);
+  \zcy = powy(\x, \y, 5);
+  return \Oy + \vecy + \scl * (prdy(\cfax, \cfay, \zax, \zay) + prdy(\cfbx, \cfby, \zbx, \zby) + prdy(\cfcx, \cfcy, \zcx, \zcy));  
+};
+function polarx(\r, \ps) {
+  return \r * cos(\ps);
+};
+function polary(\r, \ps) {
+  return \r * sin(\ps);
+};
+\Rad = 1;
+function px(\t) {
+  \x = polarx(\Rad, \t);
+  \y = polary(\Rad, \t);
+  \res = polyx(\x, \y);
+  return \res;
+};
+function py(\t) {
+  \x = polarx(\Rad, \t);
+  \y = polary(\Rad, \t);
+  \res = polyy(\x, \y);
+  return \res;
+};
+}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\begin{tikzpicture}
+\draw[->] (-1.5, 0) -- (1.5, 0);
+\draw[->] (0, -1.5) -- (0, 1.5);
+\node at (1.5, -0.3) {\footnotesize $\Re$};
+\node at (-0.3, 1.5) {\footnotesize $\Im$};
+\fill[black] (0, 0) circle (1pt);
+\node at (0-0.2, 0-0.2) {\tiny $z_0$};
 
-Слева показана красным <<маленькая>> окружность вокруг $z_0$, а справа зеленым ее образ под действием $p$.
-Здесь зеленая <<почти окружность>> делает два оборота.
+\node at (1.2, 1.2) {$\mathbb C$};
+
+\draw[->] (-0.5+\Ox , \Oy) -- (2.5+\Ox , \Oy);
+\draw[->] (0+\Ox , \Oy-0.5) -- (0+\Ox , \Oy+2.5);
+\node at (2.5+\Ox , \Oy-0.3) {\footnotesize $\Re$};
+\node at (0+\Ox -0.3, \Oy+2.5) {\footnotesize $\Im$};
+\node at (\Ox + 2.2, \Oy + 2.2) {$\mathbb C$};
+
+
+\draw[line width=1pt, red!40, domain=0:360, smooth, variable = \t] plot ({cos(\t)}, {sin(\t)});
+\draw[->] (0,0) -- ({cos(\Angle)},{sin(\Angle)});
+\fill[black] ({cos(\Angle)},{sin(\Angle)}) circle (1pt);
+\node at ({cos(\Angle) * 1.2},{sin(\Angle) * 1.2}) {\tiny $z$};
+
+\draw[samples = 100, line width=1pt, blue!40, domain=0:360, smooth, variable = \t] plot ({px(\t)}, {py(\t)});
+\draw[->] (\Ox + \vecx,\Oy + \vecy) -- ({px(\Angle)},{py(\Angle)});
+\fill[black]  ({px(\Angle)},{py(\Angle)}) circle (1pt);
+\node at ({1.2* (px(\Angle) - \vecx - \Ox) + \vecx + \Ox},{1.2* (py(\Angle) - \vecy - \Oy) + \vecy + \Oy}) {\tiny $p(z)$};
+
+\draw[->] (\Ox,\Oy) -- (\Ox + \vecx, \Oy + \vecy);
+\node at (\Ox + \vecx+0.15, \Oy + \vecy-0.2) {\tiny $p(z_0)$};
+\fill[black] (\Ox + \vecx, \Oy + \vecy) circle (1pt);
+
+\draw[black, <-] (3.3, 0.5) arc [start angle = 80, end angle = 100, radius = 4];
+\node at (2.5, 1) {$p(z)$};
+\end{tikzpicture}
+
+Слева показана красным <<маленькая>> окружность вокруг $z_0$, а справа синим ее образ под действием $p$.
+Здесь синяя <<почти окружность>> делает три оборота.
 \end{center}
 \end{enumerate}
 
