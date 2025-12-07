@@ -187,7 +187,7 @@ function pay(\t) {
 \node at (\Ox + 2.2, \Oy + 2.2) {$\mathbb C$};
 
 
-\draw[line width=1pt, red!40, domain=0:360, smooth, variable = \t] plot ({cos(\t)}, {sin(\t)});
+\draw[line width=1pt, red!40] (0, 0) circle (1cm);
 \draw[->] (0,0) -- ({cos(\Angle)},{sin(\Angle)});
 \fill[black] ({cos(\Angle)},{sin(\Angle)}) circle (1pt);
 \node at ({cos(\Angle) * 1.2},{sin(\Angle) * 1.2}) {\tiny $z_1$};
@@ -354,7 +354,7 @@ function pay(\t) {
 \node at (\Ox + 2.2, \Oy + 2.2) {$\mathbb C$};
 
 
-\draw[line width=1pt, red!40, domain=0:360, smooth, variable = \t] plot ({cos(\t)}, {sin(\t)});
+\draw[line width=1pt, red!40] (0, 0) circle (1cm);
 \draw[->] (0,0) -- ({cos(\Angle)},{sin(\Angle)});
 \fill[black] ({cos(\Angle)},{sin(\Angle)}) circle (1pt);
 \node at ({cos(\Angle) * 1.2},{sin(\Angle) * 1.2}) {\tiny $z_1$};
@@ -675,6 +675,7 @@ w = 0 + w = (u + v) + w = u + (v + w) = u + 0 = u
 Тогда непустое подмножество $U\subseteq V$ называется подпространством, если на него можно ограничить операции $+$ и $\cdot$ и относительно них оно является векторным пространством.
 Давайте определим подпространство формально.
 \begin{definition}
+\label{def::Subspace}
 Пусть $V$ -- векторное пространство над полем $F$.
 Тогда подмножество $U\subseteq V$ называется подпространством, если
 \begin{enumerate}

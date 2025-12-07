@@ -2,6 +2,7 @@
 
 
 \subsection{Подсчет знака}
+\label{section::PermSignComp}
 
 \paragraph{Декремент}
 
@@ -20,7 +21,9 @@
 \]
 
 \begin{claim}
+\label{claim::PermSignDecrComp}
 Пусть $\sigma\in \Sym{n}$, тогда $\sgn(\sigma) = (-1)^{\dec(\sigma)}$.
+В частности для любого цикла получаем $\sgn(i_1,\ldots, i_k) = (-1)^{k-1}$.
 \end{claim}
 \begin{proof}
 Действительно, разложим перестановку $\sigma$ в произведение независимых циклов $\sigma = \rho_1 \ldots \rho_k$.
@@ -56,6 +59,7 @@
 
 
 \subsection{Возведение в степень}
+\label{section::PermPowerSimple}
 
 Прежде всего сделаем два простых наблюдения:
 \begin{enumerate}
@@ -261,6 +265,7 @@
 Потому, пока мы не покроем эти темы, всерьез говорить про настоящие объемы мы не сможем.
 
 \subsection{Три разных определения}
+\label{section::DetDefs}
 
 Начнем с классического определения в виде явной формулы.
 
@@ -455,6 +460,7 @@ $ для любого ненулевого $d\in\mathbb R$.
 Самые полезные с вычислительной точки зрения -- определения (II) и (II').
 
 \subsection{Явные формулы для определителя}
+\label{section::DetSimpleCases}
 
 \paragraph{Подсчет в малых размерностях}
 
@@ -755,6 +761,7 @@ a_{\sigma(1)\tau(1)}\ldots a_{\sigma(i)\tau(i)}\ldots a_{\sigma(j)\tau(j)}\ldots
 \paragraph{Определитель от элементарных матриц}
 
 \begin{claim}
+\label{claim::DetElems}
 Верны следующие утверждения:
 \begin{enumerate}
 \item $\det (S_{ij}(\lambda)) = 1$, где $S_{ij}(\lambda)\in\Matrix{n}$ -- матрица элементарного преобразования первого типа.
@@ -774,6 +781,7 @@ a_{\sigma(1)\tau(1)}\ldots a_{\sigma(i)\tau(i)}\ldots a_{\sigma(j)\tau(j)}\ldots
 
 
 \subsection{Полилинейные кососимметрические отображения}
+\label{section::DetPolyLinear}
 
 Все утверждения в этом разделе доказываются для строк.
 Соответствующие утверждения для столбцов доказываются аналогично.

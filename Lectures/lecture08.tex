@@ -64,6 +64,7 @@ B' =
 
 \begin{claim}
 [Явные формулы обратной матрицы]
+\label{claim::InvFormulas}
 Пусть $B\in\Matrix{n}$ -- обратимая матрица, тогда 
 \[
 B^{-1} = \frac{1}{\det(B)}\hat B
@@ -97,6 +98,7 @@ B^{-1} = \frac{1}{\det(B)}\hat B
 
 \begin{claim}
 [Формулы Крамера]
+\label{claim::CramerRule}
 Пусть $A\in\Matrix{n}$, $x,b\in \mathbb R^n$ и выполнено равенство $Ax = b$.
 Тогда $\Delta \cdot x_i = \Delta_i$ для любого $i$.%
 \footnote{Здесь $x_i$ -- координаты вектора $x$.}
@@ -124,6 +126,7 @@ B^{-1} = \frac{1}{\det(B)}\hat B
 
 
 \subsection{Характеристический многочлен}
+\label{section::CharPoly}
 
 Пусть $A\in\Matrix{n}$ -- произвольная квадратная матрица и $\lambda \in\mathbb R$.
 Рассмотрим функцию $\chi_A(\lambda) = \det(\lambda E - A)$.
@@ -171,6 +174,7 @@ B^{-1} = \frac{1}{\det(B)}\hat B
 \end{proof}
 
 \begin{definition}
+\label{def::CharPoly}
 Для произвольной матрицы $A\in\Matrix{n}$ многочлен $\chi_A(\lambda)$ называется {\it характеристическим многочленом} матрицы $A$.
 \end{definition}
 

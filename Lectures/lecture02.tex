@@ -26,6 +26,7 @@ a_{m1}& \ldots &a_{mn}
 Это важно учитывать, так как нужно вносить поправки в соответствующие формулы.}
 
 \subsection{Операции над матрицами}
+\label{section::MatrixOps}
 
 \paragraph{Сложение}
 
@@ -344,26 +345,64 @@ a_{i1} b_{1j} + \ldots + a_{in} b_{nj}
 Все эти свойства проверяются непосредственным вычислением по определению.
 
 \subsection{Специальные виды матриц}
+\label{section::SpecialMatrices}
 
 Ниже мы перечислим названия некоторых специальных классов матриц:
 \begin{itemize}
 \item 
-$A = 
+$
 \begin{pmatrix}
 {\lambda_1}&{\ldots}&{0}\\
 {\vdots}&{\ddots}&{\vdots}\\
 {0}&{\ldots}&{\lambda_n}\\
-\end{pmatrix}$ -- диагональная матрица.
-Все ненулевые элементы стоят на главной диагонали, то есть в позиции, где номер строки равен номеру столбца.
+\end{pmatrix}\in \Matrix{n}$ -- диагональная матрица.
+Все ненулевые элементы стоят на {\it главной диагонали}, то есть в позиции, где номер строки равен номеру столбца.
 
 \item
-$A = 
+$
 \begin{pmatrix}
 {\lambda}&{\ldots}&{0}\\
 {\vdots}&{\ddots}&{\vdots}\\
 {0}&{\ldots}&{\lambda}\\
-\end{pmatrix}$ -- скалярная матрица.
+\end{pmatrix}\in \Matrix{n}$ -- скалярная матрица.
 Диагональная матрица с одинаковыми элементами на диагонали.
+
+\item 
+$
+\begin{pmatrix}
+{0}&{0}&{\ldots}&{0}\\
+{\vdots}&{\vdots}&{\vdots}&{\vdots}\\
+{0}&{0}&{\ldots}&{0}\\
+\end{pmatrix}\in \MatrixDim{m}{n}$ -- нулевая матрица.
+Обозначается как $0\in \MatrixDim{m}{n}$.
+
+\item
+ $
+\begin{pmatrix}
+{1}&{\ldots}&{0}\\
+{\vdots}&{\ddots}&{\vdots}\\
+{0}&{\ldots}&{1}\\
+\end{pmatrix}\in \Matrix{n}$ -- единичная матрица.
+На диагонали стоят единицы, вне диагонали -- нули.
+Обозначается как $E\in \Matrix{n}$ или если надо подчеркнуть размер матрицы $E_n$.
+
+\item
+ $
+\begin{pmatrix}
+{*}&{\ldots}&{*}\\
+{\vdots}&{\ddots}&{\vdots}\\
+{0}&{\ldots}&{*}\\
+\end{pmatrix}\in \Matrix{n}$ -- верхне треугольная матрица.
+Все элементы ниже главное диагонали равны нулю.
+
+\item
+ $
+\begin{pmatrix}
+{*}&{\ldots}&{0}\\
+{\vdots}&{\ddots}&{\vdots}\\
+{*}&{\ldots}&{*}\\
+\end{pmatrix}\in \Matrix{n}$ -- нижне треугольная матрица.
+Все элементы выше главное диагонали равны нулю.
 \end{itemize}
 
 \subsection{Свойства операций}
@@ -558,6 +597,7 @@ b_m\\
 \end{proof}
 
 \subsection{Дефекты матричных операций}
+\label{section::MatOpsDefects}
 
 \paragraph{Матрицы как новые числа}
 
@@ -753,8 +793,11 @@ b_m\\
 
 \paragraph{Обратимые матрицы}
 
+\begin{definition}
+\label{def::InvertibleMatrix}
 Матрица $A\in\MatrixDim{m}{n}$ называется обратимой, если к ней существует левый и правый обратный.%
 \footnote{Ниже мы покажем, что из двусторонней обратимости следует, что матрица $A$ обязана быть квадратной.}
+\end{definition}
 
 \begin{claim}
 Пусть матрица $A\in\MatrixDim{m}{n}$ обратима.
@@ -790,6 +833,7 @@ m = \tr(E_m) = \tr(AB) = \tr(BA) = \tr(E_n) = n
 Такую матрицу $B$ обозначают $A^{-1}$ и называют обратной к матрице $A$.
 
 \begin{claim}
+\label{claim::ProdTranspInv}
 Пусть $A, B\in \Matrix{n}$ -- обратимые матрицы.
 Тогда 
 \begin{enumerate}

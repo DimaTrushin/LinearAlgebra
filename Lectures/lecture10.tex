@@ -2,6 +2,7 @@
 
 
 \subsection{Простейшие свойства и операции}
+\label{section::ComplexSimpleProps}
 
 \paragraph{Комплексное сопряжение}
 
@@ -52,6 +53,7 @@
 \end{enumerate}
 
 \subsection{Геометрическая модель}
+\label{section::ComplexGeom}
 
 Комплексные числа $\mathbb C$ можно отождествить с вещественной плоскостью $\mathbb R^2$, а именно $a+bi$ соответствует вектору на плоскости $\left(\begin{smallmatrix}a\\b\end{smallmatrix}\right)$.
 Таким образом про каждое комплексное число можно думать геометрически как про вектора.
@@ -118,7 +120,8 @@ z = |z| e^{i\varphi} = e^{\ln |z| + i\varphi}
 
 Алгебраическая форма записи комплексного числа хорошо согласована со сложением, а тригонометрическая -- с умножением, о чем говорит следующее.
 
-\begin{claim*}
+\begin{claim}
+\label{claim::ComplexMultProp}
 Для комплексных чисел в тригонометрической форме верны следующие формулы
 \begin{enumerate}
 \item Пусть $z_1 = r_1(\cos \varphi + i \sin \varphi)$ и $z_2=r_2(\cos \psi + i \sin \psi)$ -- два ненулевых комплексных числа, тогда
@@ -137,7 +140,7 @@ z_1 z_2 = r_1 r_2 (\cos(\varphi + \psi) + i\sin(\varphi + \psi))
 z^n = r^n (\cos(n \varphi) + i \sin(n \varphi))
 \]
 \end{enumerate}
-\end{claim*}
+\end{claim}
 \begin{proof}
 1) По определению
 \begin{gather*}
@@ -151,8 +154,10 @@ r_1(\cos \varphi + i \sin \varphi) r_2 (\cos \psi + i \sin \psi) = r_1 r_2 (\cos
 \end{proof}
 
 \subsection{Основная теорема алгебры}
+\label{section::MainAlgThm}
 
 \begin{definition}
+\label{def::AlgClosedField}
 Поле $F$ называется алгебраически замкнутым, если для любого многочлена $f\in F[x]\setminus F$ существует корень $\alpha\in F$, то есть $f(\alpha) = 0$.
 \end{definition}
 
@@ -286,7 +291,7 @@ function py(\t) {
 \node at (\Ox + 2.2, \Oy + 2.2) {$\mathbb C$};
 
 
-\draw[line width=1pt, red!40, domain=0:360, smooth, variable = \t] plot ({cos(\t)}, {sin(\t)});
+\draw[line width=1pt, red!40] (0, 0) circle (1cm);
 \draw[->] (0,0) -- ({cos(\Angle)},{sin(\Angle)});
 \fill[black] ({cos(\Angle)},{sin(\Angle)}) circle (1pt);
 \node at ({cos(\Angle) * 1.2},{sin(\Angle) * 1.2}) {\tiny $z$};

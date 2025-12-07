@@ -122,6 +122,7 @@ f(D)g(D) = (fg)(D)
 
 \begin{claim}
 [Теорема Гамильтона-Кэли]
+\label{claim::HamiltoCaly}
 Пусть $A\in\Matrix{n}$.
 Тогда $\chi_A(A) = 0$.
 \end{claim}
@@ -267,6 +268,7 @@ g(\lambda) = E\lambda - A
 
 \begin{definition}
 [Поле]
+\label{def::Field}
 Поле это следующий набор данных: $(F, + , \cdot)$, где
 \begin{itemize}
 \item $F$ -- некоторое множество.
@@ -411,6 +413,7 @@ a \cdot 0 + a\cdot 0 + - (a\cdot 0) = a\cdot 0 + - (a\cdot 0)
 \subsection{Абстрактное определение комплексных чисел}
 
 \begin{definition}
+\label{def::ComplexAbstr}
 Пусть поле $\mathbb C$ обладает следующими свойствами:
 \begin{enumerate}
 \item $\mathbb R\subseteq\mathbb C$ -- подполе, т.е. поле $\mathbb C$ содержит вещественные числа и операции сложения и умножения ограничиваются на $\mathbb R$ в обычные операции сложения и умножения.%
@@ -489,6 +492,7 @@ a \cdot 0 + a\cdot 0 + - (a\cdot 0) = a\cdot 0 + - (a\cdot 0)
 Для того чтобы сравнить различные поля и сказать, что они одинаковые или различные нам потребуется понятие изоморфизма полей.
 
 \begin{definition}
+\label{def::FieldsHom}
 Пусть $F_1$ и $F_2$ поля.
 Отображение $\varphi\colon F_1\to F_2$ называется гомоморфизмом полей, если 
 \begin{enumerate}
@@ -535,6 +539,7 @@ a \cdot 0 + a\cdot 0 + - (a\cdot 0) = a\cdot 0 + - (a\cdot 0)
 Дело в том, что в наших полях лежат дополнительно вещественные числа и мы, когда будем сравнивать эти два поля, хотим чтобы это сравнение было согласовано в каком-то смысле с вещественными числами.
 
 \begin{definition}
+\label{def::FieldsHomOver}
 Пусть $F_1$ и $F_2$ -- два поля, содержащие поле вещественных чисел $\mathbb R$, то есть $\mathbb R\subseteq F_1$ и $\mathbb R\subseteq F_2$ и операции с $F_i$ ограничиваются на соответствующие операции на вещественных числах.
 Будем говорить, что $\varphi\colon F_1\to F_2$ является изоморфизмом над $\mathbb R$, если 
 \begin{enumerate}
